@@ -1,0 +1,55 @@
+package main
+
+import (
+	"flag"
+	"log"
+	"os"
+	"strings"
+)
+
+// run the following:
+// go mod init dummy.test/create
+// go mod tidy
+// go run . -example=true -part1=true -part2=false
+
+func main() {
+	log.SetPrefix("{{ .Day }}: ")
+	example := flag.Bool("example", true, "")
+	runPart1 := flag.Bool("part1", false, "")
+	runPart2 := flag.Bool("part2", false, "")
+	flag.Parse()
+	var lines = readToLines(*example)
+
+	if *runPart1 {
+		part1(lines)
+	}
+	if *runPart2 {
+		part2(lines)
+	}
+}
+
+func part1(lines []string) {
+	println("---------Part 1--------------")
+
+}
+
+func part2(lines []string) {
+	println("---------Part 2--------------")
+}
+
+func readToLines(example bool) []string {
+	var filename = ""
+	if example {
+		println("---------Example--------------")
+		filename = "{{ .Day }}-example.txt"
+	} else {
+		println("---------Real data--------------")
+		filename = "{{ .Day }}-data.txt"
+	}
+	content, err := os.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+	return lines
+}
