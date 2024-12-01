@@ -9,7 +9,7 @@ import (
 )
 
 
-//todo make mod
+
 
 func main() {
 	log.SetPrefix("Create: ")
