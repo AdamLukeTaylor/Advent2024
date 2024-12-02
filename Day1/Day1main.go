@@ -40,20 +40,20 @@ func part1(lines []string) {
 	var diff []int
 	for _, line := range lines {
 		println(line)
-		matches := re.FindAllString(line,-1)
-		intL,_:=strconv.Atoi(matches[0])
-		intR,_:=strconv.Atoi(matches[1])
-		fmt.Println(fmt.Sprintf("l %d",intL))
-		fmt.Println(fmt.Sprintf("r %d",intR))
-		left = append(left,intL)
-		right = append(right,intR)
+		matches := re.FindAllString(line, -1)
+		intL, _ := strconv.Atoi(matches[0])
+		intR, _ := strconv.Atoi(matches[1])
+		fmt.Println(fmt.Sprintf("l %d", intL))
+		fmt.Println(fmt.Sprintf("r %d", intR))
+		left = append(left, intL)
+		right = append(right, intR)
 	}
 	sort.Ints(left)
 	sort.Ints(right)
 	fmt.Println(left)
 	fmt.Println(right)
 	for i := range left {
-		diff=append(diff,Abs(left[i]-right[i]))
+		diff = append(diff, Abs(left[i]-right[i]))
 	}
 	fmt.Println(diff)
 	fmt.Println(sum(diff))
@@ -78,6 +78,36 @@ func sum(nums []int) int {
 
 func part2(lines []string) {
 	println("---------Part 2--------------")
+	re := regexp.MustCompile(`\d+`)
+	var left []int
+	var right []int
+	var similarity []int
+	for _, line := range lines {
+		matches := re.FindAllString(line, -1)
+		intL, _ := strconv.Atoi(matches[0])
+		intR, _ := strconv.Atoi(matches[1])
+		left = append(left, intL)
+		right = append(right, intR)
+	}
+	// sort.Ints(left)
+	// sort.Ints(right)
+	fmt.Println(left)
+	fmt.Println(right)
+
+	// filter right for each in left
+
+	for _, l := range left {
+		var count = 0
+		// fmt.Println(fmt.Sprintf("l %d",l))
+		for _, r := range right {
+			if l == r {
+				count = count + 1
+				// fmt.Println(fmt.Sprintf("l %d",count))
+			}
+		}
+		similarity = append(similarity, l*count)
+	}
+	fmt.Println(sum(similarity))
 }
 
 func readToLines(example bool) []string {

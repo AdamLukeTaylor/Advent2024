@@ -61,7 +61,7 @@ func main() {
 	}
 	// create the main file
 	templateData := Day{
-		Day: "Day1",
+		Day: day,
 	}
 	var tmplFile = "main.tmpl"
 	outputName := "main.go"
